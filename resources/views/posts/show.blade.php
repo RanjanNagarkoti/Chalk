@@ -14,7 +14,11 @@
                 <hr>
                 <p class="card-text">{{ $post->description }}</p>
                 <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="card-link">Edit</a>
-                <a href="{{ route('posts.destroy', ['post' => $post->id]) }}" class="card-link">Delete</a>
+                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
             </div>
         </div>
     </section>
