@@ -32,4 +32,11 @@ class PostController extends Controller
 
         return to_route('posts.index');
     }
+
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('posts.show', compact('post'));
+    }
 }
