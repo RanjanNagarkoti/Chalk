@@ -13,12 +13,14 @@
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <hr>
                 <p class="card-text">{{ $post->description }}</p>
-                <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="card-link">Edit</a>
-                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
+                <div class="d-flex">
+                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-sm btn-primary me-1">Edit</a>
+                    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger ms-1">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
