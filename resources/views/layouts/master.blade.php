@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    @include('shared.nav')
     <div class="container">
         @yield('content')
     </div>
