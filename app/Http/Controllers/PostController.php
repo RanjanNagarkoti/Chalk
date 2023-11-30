@@ -52,7 +52,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'description' => 'required',
         ]);
 
