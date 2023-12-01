@@ -4,12 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Exception;
 
 class PostController extends Controller
 {
     public function index()
     {
+        Debugbar::info('I\'m info!');
+        Debugbar::error('I\'m error!');
+        Debugbar::warning('I\'m warning!');
+        Debugbar::addMessage('I\'m addMessage!');
+
+        Debugbar::startMeasure('Blockade', 'Render message');
+
+        try {
+            throw new Exception('Try Message!');
+        } catch (Exception $e) {
+            Debugbar::addException($e);
+        }
+
         $posts = Post::all();
+
+        Debugbar::info($posts);
+        
         return view('posts.index', compact('posts'));
     }
 
