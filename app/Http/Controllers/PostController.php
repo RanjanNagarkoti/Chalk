@@ -67,21 +67,23 @@ class PostController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        $validated = $request->validate([
+        $validated = $request->validated([
             'title' => 'required|max:255',
             'description' => 'required',
         ]);
 
-        $post = Post::findOrFail($id);
+        $post->update($validated);
 
-        $post->title = $validated['title'];
-        $post->description = $validated['description'];
+        // $post = Post::findOrFail($id);
 
-        $post->save();
+        // $post->title = $validated['title'];
+        // $post->description = $validated['description'];
 
-        return to_route('posts.show', ['post' => $id]);
+        // $post->save();
+
+        return to_route('posts.show');
     }
 
     public function destroy($id)
