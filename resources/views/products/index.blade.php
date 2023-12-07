@@ -7,14 +7,13 @@
         </div>
     </section>
 
-    <section class="d-flex flex-wrap gap-5 justify-content-between">
+    <section class="d-flex flex-wrap gap-5 justify-content-evenly">
         @foreach ($products as $product)
             <div class="card" style="width: 20rem;">
-                <img src="{{ asset('storage/images/' . $product->picture) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text">{{ $product->body }}</p>
-                    <a href="{{ route('posts.show', ['post' => $product->id]) }}" class="btn btn-sm btn-primary">View
+                    <a href="{{ route('products.show', ['product' => $product]) }}" class="btn btn-sm btn-primary">View
                         More</a>
                 </div>
             </div>

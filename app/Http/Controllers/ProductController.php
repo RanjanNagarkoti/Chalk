@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProudctRequest;
 
 class ProductController extends Controller
 {
@@ -21,18 +21,36 @@ class ProductController extends Controller
 
     public function store(Product $product, StoreProductRequest $request)
     {
-        $data = $request->validated();
+        $validated = $request->validated();
+
+        $product = $product->create($validated);
+
+        return redirect()->route('products.show', ['product' => $product]);
+    }
+
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
+
+    public function edit(Product $product)
+    {
+        return view('products.edit', compact('product'));
+    }
+
+    public function update(Product $product, UpdateProudctRequest $request)
+    {
+        $validated = $request->validated();
+
+        $product->update($validated);
+
+        return redirect()->route('products.show', ['product' => $product]);
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
         
-        $picture = $data['picture'];
-
-        $extension = $data['picture']->extension();
-        $unique = date('ymd') . time();
-        $name = $unique . '.' . $extension;
-        $data['picture'] = $name;
-
-        $picture->storeAs('public/images', $name);
-        $product->create($data);
-
         return to_route('products.index');
     }
 }
