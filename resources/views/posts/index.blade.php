@@ -7,7 +7,7 @@
         </div>
     </section>
 
-    <section class="d-flex flex-wrap gap-5 justify-content-between">
+    <section class="d-flex flex-wrap gap-5 justify-content-evenly">
         @foreach ($posts as $post)
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
